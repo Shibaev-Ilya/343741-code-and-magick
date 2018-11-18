@@ -1,24 +1,18 @@
 'use strict';
 
-/*
-var  названиеСвойства = ...
-var  названиеСущность+названиеСвойства = ...
-var  делатьЧтото = ...
-*/
-
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var CLOUD_COLOR = '#ffffff';
-// SHADOW
+
 var SHADOW_INDENT = 10;
 var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
-// BAR
+
 var BAR_WIDTH_INDENT = 50;
 var BAR_WIDTH = 40;
 var BAR_PLAYER_COLOR = 'rgba(255, 0, 0, 1)';
-// TEXT
+
 var TEXT_HEIGHT = 40;
 var TEXT_INDENT = BAR_WIDTH_INDENT / 2;
 var TEXT_COLOR = '#000000';
@@ -27,7 +21,6 @@ var TEXT_USER_NAME = 'Вы';
 
 var barHeight = (CLOUD_HEIGHT - BAR_WIDTH_INDENT - TEXT_HEIGHT - BAR_WIDTH_INDENT) * -1;
 
-// MESSAGE
 var MESSAGE_FONT_SIZE = 16;
 var MESSAGE_FONT_FAMILY = 'PT Mono';
 var MESSAGE_FONT_WEIGHT = 'bold';
@@ -69,8 +62,6 @@ var getMaxElement = function (arr) {
     }
   }
   return maxElement;
-
-  // URL: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
 };
 
 var renderMessages = function (ctx) {
@@ -99,11 +90,9 @@ var renderBars = function (ctx, times, names) {
     ctx.fillText(Math.floor(times[i]), barPositionX, (barHeight * times[i]) / maxTime + MESSAGE_TIME_INDENT);
     ctx.fillText(names[i], barPositionX, CLOUD_HEIGHT - TEXT_INDENT);
 
-    // устанавливает цвет гистограммы игрока
-    // иначе, генерирует случайный синий цвет
     ctx.fillStyle = names[i] === TEXT_USER_NAME ? BAR_PLAYER_COLOR : generateRandomColor();
 
-    ctx.fillRect(CLOUD_X + BAR_WIDTH_INDENT + (BAR_WIDTH + BAR_WIDTH_INDENT) * i, CLOUD_HEIGHT - TEXT_HEIGHT, BAR_WIDTH, (barHeight * times[i]) / maxTime);
+    ctx.fillRect(barPositionX, CLOUD_HEIGHT - TEXT_HEIGHT, BAR_WIDTH, (barHeight * times[i]) / maxTime);
   }
 };
 
