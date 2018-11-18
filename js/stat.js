@@ -19,13 +19,14 @@ var TEXT_COLOR = '#000000';
 var TEXT_BASELINE = 'hanging';
 var TEXT_USER_NAME = 'Вы';
 
-var barHeight = (CLOUD_HEIGHT - BAR_WIDTH_INDENT - TEXT_HEIGHT - BAR_WIDTH_INDENT) * -1;
+var BAR_HEIGHT = (CLOUD_HEIGHT - BAR_WIDTH_INDENT - TEXT_HEIGHT - BAR_WIDTH_INDENT) * -1;
 
 var MESSAGE_FONT_SIZE = 16;
 var MESSAGE_FONT_FAMILY = 'PT Mono';
 var MESSAGE_FONT_WEIGHT = 'bold';
 var MESSAGE_FONT = MESSAGE_FONT_WEIGHT + ' ' + MESSAGE_FONT_SIZE + 'px' + ' ' + MESSAGE_FONT_FAMILY;
 var MESSAGE_FONT_COLOR = '#000000';
+
 var MESSAGE_FONT_BASELINE = 'baseline';
 
 var MESSAGE_TEXT_HEADLINE = 'Ура вы победили!';
@@ -77,22 +78,23 @@ var generateRandomColor = function () {
 };
 
 var renderBars = function (ctx, times, names) {
-  var barPositionX;
   var maxTime = getMaxElement(times);
-
+  var barPositionX;
+  var barPositionY;
   for (var i = 0; i < names.length; i++) {
 
     ctx.fillStyle = TEXT_COLOR;
     ctx.textBaseline = TEXT_BASELINE;
 
     barPositionX = CLOUD_X + BAR_WIDTH_INDENT + (BAR_WIDTH + BAR_WIDTH_INDENT) * i;
+    barPositionY = (BAR_HEIGHT * times[i]) / maxTime;
 
-    ctx.fillText(Math.floor(times[i]), barPositionX, (barHeight * times[i]) / maxTime + MESSAGE_TIME_INDENT);
+    ctx.fillText(Math.floor(times[i]), barPositionX, barPositionY + MESSAGE_TIME_INDENT);
     ctx.fillText(names[i], barPositionX, CLOUD_HEIGHT - TEXT_INDENT);
 
     ctx.fillStyle = names[i] === TEXT_USER_NAME ? BAR_PLAYER_COLOR : generateRandomColor();
 
-    ctx.fillRect(barPositionX, CLOUD_HEIGHT - TEXT_HEIGHT, BAR_WIDTH, (barHeight * times[i]) / maxTime);
+    ctx.fillRect(barPositionX, CLOUD_HEIGHT - TEXT_HEIGHT, BAR_WIDTH, barPositionY);
   }
 };
 
