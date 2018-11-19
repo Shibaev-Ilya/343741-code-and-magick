@@ -74,11 +74,11 @@ var renderMessages = function (ctx) {
 // @TODO генерирую случайный цвет
 var generateRandomColor = function (color) {
   switch (color) {
-    case 'randomRedColor':
+    case 'red':
       return 'rgba(' + Math.round(Math.random() * 255) + ', 0, 0, ,1)';
-    case 'randomGreenColor':
+    case 'green':
       return 'rgba(0, ' + Math.round(Math.random() * 255) + ', 0, 1)';
-    case 'randomBlueColor':
+    case 'blue':
       return 'rgba(0, 0,' + Math.round(Math.random() * 255) + ', 1)';
     default:
       return 'rgba(0, 0,' + Math.round(Math.random() * 255) + ', 1)';
@@ -101,7 +101,7 @@ var renderBars = function (ctx, times, names) {
     ctx.fillText(names[i], barPositionX, CLOUD_HEIGHT - TEXT_INDENT);
 
     // @TODO при передачи аргумента generateRandomColor(randomBlueColor) - ошибка.
-    ctx.fillStyle = names[i] === TEXT_USER_NAME ? BAR_PLAYER_COLOR : generateRandomColor();
+    ctx.fillStyle = names[i] === TEXT_USER_NAME ? BAR_PLAYER_COLOR : generateRandomColor('blue');
 
     ctx.fillRect(barPositionX, CLOUD_HEIGHT - BAR_BOTTOM_INDENT, BAR_WIDTH, barPositionY);
   }
