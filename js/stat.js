@@ -7,8 +7,8 @@ var CLOUD_Y = 10;
 var CLOUD_COLOR = '#ffffff';
 var CLOUD_END_POINT_X = CLOUD_X + CLOUD_WIDTH;
 var CLOUD_END_POINT_Y = CLOUD_Y + CLOUD_HEIGHT;
-var CLOUD_NIDDLE_POINT_X = CLOUD_X + CLOUD_WIDTH / 2;
-var CLOUD_NIDDLE_POINT_Y = CLOUD_X + CLOUD_HEIGHT / 2;
+var CLOUD_MIDDLE_POINT_X = CLOUD_X + CLOUD_WIDTH / 2;
+var CLOUD_MIDDLE_POINT_Y = CLOUD_X + CLOUD_HEIGHT / 2;
 
 var SHADOW_INDENT = 10;
 var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
@@ -41,13 +41,13 @@ var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.beginPath();
   ctx.moveTo(x, y);
-  ctx.lineTo(CLOUD_NIDDLE_POINT_X, CLOUD_END_POINT_Y - 260);
+  ctx.lineTo(CLOUD_MIDDLE_POINT_X, CLOUD_END_POINT_Y - 260);
   ctx.lineTo(CLOUD_END_POINT_X, y);
-  ctx.lineTo(CLOUD_END_POINT_X - 10, CLOUD_NIDDLE_POINT_Y);
+  ctx.lineTo(CLOUD_END_POINT_X - 10, CLOUD_MIDDLE_POINT_Y);
   ctx.lineTo(CLOUD_END_POINT_X, CLOUD_END_POINT_Y);
-  ctx.lineTo(CLOUD_NIDDLE_POINT_X, CLOUD_END_POINT_Y - 10);
+  ctx.lineTo(CLOUD_MIDDLE_POINT_X, CLOUD_END_POINT_Y - 10);
   ctx.lineTo(x, CLOUD_END_POINT_Y);
-  ctx.lineTo(CLOUD_END_POINT_X - 410, CLOUD_NIDDLE_POINT_Y);
+  ctx.lineTo(CLOUD_END_POINT_X - 410, CLOUD_MIDDLE_POINT_Y);
   ctx.stroke();
   ctx.fill();
 };
@@ -71,7 +71,6 @@ var renderMessages = function (ctx) {
   ctx.fillText(MESSAGE_TEXT_RESULT, MESSAGE_START_POSITION, MESSAGE_TEXT_INDENT + MESSAGE_LINEHEIGHT);
 };
 
-// @TODO генерирую случайный цвет
 var generateRandomColor = function (color) {
   switch (color) {
     case 'red':
@@ -100,7 +99,6 @@ var renderBars = function (ctx, times, names) {
     ctx.fillText(Math.floor(times[i]), barPositionX, barPositionY + MESSAGE_TIME_INDENT);
     ctx.fillText(names[i], barPositionX, CLOUD_HEIGHT - TEXT_INDENT);
 
-    // @TODO при передачи аргумента generateRandomColor(randomBlueColor) - ошибка.
     ctx.fillStyle = names[i] === TEXT_USER_NAME ? BAR_PLAYER_COLOR : generateRandomColor('blue');
 
     ctx.fillRect(barPositionX, CLOUD_HEIGHT - BAR_BOTTOM_INDENT, BAR_WIDTH, barPositionY);
