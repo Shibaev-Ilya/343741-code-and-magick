@@ -100,8 +100,8 @@ var renderBars = function (ctx, times, names) {
     ctx.fillText(Math.floor(times[i]), barPositionX, barPositionY + MESSAGE_TIME_INDENT);
     ctx.fillText(names[i], barPositionX, CLOUD_HEIGHT - TEXT_INDENT);
 
-    // @TODO при передачи аргумента функции - ошибка.
-    ctx.fillStyle = names[i] === TEXT_USER_NAME ? BAR_PLAYER_COLOR : generateRandomColor(randomBlueColor);
+    // @TODO при передачи аргумента generateRandomColor(randomBlueColor) - ошибка.
+    ctx.fillStyle = names[i] === TEXT_USER_NAME ? BAR_PLAYER_COLOR : generateRandomColor();
 
     ctx.fillRect(barPositionX, CLOUD_HEIGHT - BAR_BOTTOM_INDENT, BAR_WIDTH, barPositionY);
   }
