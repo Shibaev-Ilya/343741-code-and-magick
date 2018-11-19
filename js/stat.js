@@ -8,7 +8,7 @@ var CLOUD_COLOR = '#ffffff';
 var CLOUD_END_POINT_X = CLOUD_X + CLOUD_WIDTH;
 var CLOUD_END_POINT_Y = CLOUD_Y + CLOUD_HEIGHT;
 var CLOUD_MIDDLE_POINT_X = CLOUD_X + CLOUD_WIDTH / 2;
-var CLOUD_MIDDLE_POINT_Y = CLOUD_X + CLOUD_HEIGHT / 2;
+var CLOUD_MIDDLE_POINT_Y = CLOUD_Y + CLOUD_HEIGHT / 2;
 
 var SHADOW_INDENT = 10;
 var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
@@ -40,13 +40,13 @@ var MESSAGE_START_POSITION = CLOUD_X + (BAR_WIDTH_INDENT / 2);
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.beginPath();
-  ctx.moveTo(x, y);
+  ctx.moveTo(CLOUD_X, CLOUD_Y);
   ctx.lineTo(CLOUD_MIDDLE_POINT_X, CLOUD_END_POINT_Y - 260);
-  ctx.lineTo(CLOUD_END_POINT_X, y);
+  ctx.lineTo(CLOUD_END_POINT_X, CLOUD_Y);
   ctx.lineTo(CLOUD_END_POINT_X - 10, CLOUD_MIDDLE_POINT_Y);
   ctx.lineTo(CLOUD_END_POINT_X, CLOUD_END_POINT_Y);
   ctx.lineTo(CLOUD_MIDDLE_POINT_X, CLOUD_END_POINT_Y - 10);
-  ctx.lineTo(x, CLOUD_END_POINT_Y);
+  ctx.lineTo(CLOUD_X, CLOUD_END_POINT_Y);
   ctx.lineTo(CLOUD_END_POINT_X - 410, CLOUD_MIDDLE_POINT_Y);
   ctx.stroke();
   ctx.fill();
