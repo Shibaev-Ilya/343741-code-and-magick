@@ -1,18 +1,13 @@
 'use strict';
 
+// Секция констант
 var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_LASTNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARD_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARD_QUANTITY = 4;
 
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
-var similarListElement = userDialog.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
-
+// Секция функций
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1) - min);
 };
@@ -22,24 +17,29 @@ var getRandomElement = function (array) {
 };
 
 var generateWizard = function () {
-  var wizardName = getRandomElement(WIZARD_NAMES);
-  var wizardLastName = getRandomElement(WIZARD_LASTNAMES);
-  var wizardCoatColor = getRandomElement(WIZARD_COATS_COLORS);
-  var wizardEyeColor = getRandomElement(WIZARD_EYES_COLORS);
   return {
-    name: wizardName + ' ' + wizardLastName,
-    coatColor: wizardCoatColor,
-    eyesColor: wizardEyeColor
+    name: getRandomElement(WIZARD_NAMES) + ' ' + getRandomElement(WIZARD_LASTNAMES),
+    coatColor: getRandomElement(WIZARD_COATS_COLORS),
+    eyesColor: getRandomElement(WIZARD_EYES_COLORS)
   };
 };
 
-var generateWizards = function (wizardQuantiy) {
+var generateWizards = function () {
   var similarWizards = [];
-  for (var i = 0; i < wizardQuantiy; i++) {
+  for (var i = 0; i < WIZARD_QUANTITY; i++) {
     similarWizards.push(generateWizard());
   }
   return similarWizards;
 };
+
+// Секция основной логики файла
+var userDialog = document.querySelector('.setup');
+userDialog.classList.remove('hidden');
+var similarListElement = userDialog.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template')
+    .content
+    .querySelector('.setup-similar-item');
+
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
