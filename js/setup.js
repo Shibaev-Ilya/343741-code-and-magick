@@ -49,11 +49,11 @@ var getRandomElement = function (array) {
 };
 
 var userDialogElement = document.querySelector('.setup');
-userDialogElement.classList.remove('hidden');
 var similarListElement = userDialogElement.querySelector('.setup-similar-list');
 var similarWizardTemplateElement = document.querySelector('#similar-wizard-template')
     .content
     .querySelector('.setup-similar-item');
-
+userDialogElement.classList.remove('hidden');
 userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
-renderWizards(generateWizards(WIZARD_QUANTITY));
+
+renderWizards(generateWizards());
