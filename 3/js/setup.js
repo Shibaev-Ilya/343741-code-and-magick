@@ -26,21 +26,20 @@ var renderWizards = function () {
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
-  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+  wizardElement.querySelector('.setup-similar-label').textContent = wizard.name + ' ' + wizard.lastName;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
   return wizardElement;
 };
-// Генерирую массиб волшебников. Ошибка!!!
-var generateWizards = function () {
-  var wizardName = WIZARD_NAMES[Math.floor(Math.random() * WIZARD_NAMES.length)];
-  var wizardLastName = WIZARD_LASTNAMES[Math.floor(Math.random() * WIZARD_LASTNAMES.length)];
-  var wizardCoatColor = WIZARD_COAT_COLOR[Math.floor(Math.random() * WIZARD_COAT_COLOR.length)];
-  var wizardEyeColor = WIZARD_EYES_COLOR[Math.floor(Math.random() * WIZARD_EYES_COLOR.length)];
 
+var generateWizards = function () {
   var wizards = [];
   for (var i = 0; i < WIZARD_QUANTITY; i++) {
+    var wizardName = WIZARD_NAMES[Math.floor(Math.random() * WIZARD_NAMES.length)];
+    var wizardLastName = WIZARD_LASTNAMES[Math.floor(Math.random() * WIZARD_LASTNAMES.length)];
+    var wizardCoatColor = WIZARD_COAT_COLOR[Math.floor(Math.random() * WIZARD_COAT_COLOR.length)];
+    var wizardEyeColor = WIZARD_EYES_COLOR[Math.floor(Math.random() * WIZARD_EYES_COLOR.length)];
     wizards.push({
       name: wizardName,
       lastName: wizardLastName,
