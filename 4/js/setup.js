@@ -1,6 +1,5 @@
 'use strict';
 
-// @TODO На submit нельзя перейти табом
 var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_LASTNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARD_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
@@ -11,6 +10,11 @@ var WIZARD_QUANTITY = 4;
 var KEYCODE_ENTER = 13;
 var KEYCODE_ESC = 27;
 
+var CUSTOM_WARNING_MESSAGE_MAP = {
+  tooShort: 'Имя должно состоять минимум из 2-х символов',
+  emptyField: 'Обязательное поле'
+};
+
 // variables
 var setupFormOpenElement = document.querySelector('.setup-open');
 var setupFormCloseElement = document.querySelector('.setup-close');
@@ -19,7 +23,7 @@ var setupFormElement = document.querySelector('.setup');
 var setupUserNameElement = document.querySelector('.setup-user-name');
 var setupSubmitElement = document.querySelector('.setup-submit');
 
-var setupPlayer = document.querySelector('.setup-player');
+var setupPlayerElement = document.querySelector('.setup-player');
 var wizardCoatColorElement = document.querySelector('.wizard-coat');
 var wizardEyesColorElement = document.querySelector('.wizard-eyes');
 var wizardFireballColorElement = document.querySelector('.setup-fireball');
@@ -79,11 +83,9 @@ var onSetupSubmitClick = function () {
 
 var onUserNameInValidity = function () {
   if (setupUserNameElement.validity.tooShort) {
-    setupUserNameElement.setCustomValidity('Имя должно состоять минимум из 2-х символов');
-  } else if (setupUserNameElement.validity.tooLong) {
-    setupUserNameElement.setCustomValidity('Имя не должно превышать 25-ти символов');
+    setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.tooShort);
   } else if (setupUserNameElement.validity.valueMissing) {
-    setupUserNameElement.setCustomValidity('Обязательное поле');
+    setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.emptyField);
   } else {
     setupUserNameElement.setCustomValidity('');
   }
@@ -101,7 +103,7 @@ var popupOpen = function () {
   setupUserNameElement.addEventListener('invalid', onUserNameInValidity);
   setupUserNameElement.addEventListener('input', onUserNameInValidity);
   setupSubmitElement.addEventListener('click', onSetupSubmitClick);
-  setupPlayer.addEventListener('click', onSetupWizardColorClick);
+  setupPlayerElement.addEventListener('click', onSetupWizardColorClick);
 };
 
 var popupClose = function () {
@@ -111,7 +113,7 @@ var popupClose = function () {
   setupUserNameElement.removeEventListener('invalid', onUserNameInValidity);
   setupUserNameElement.removeEventListener('input', onUserNameInValidity);
   setupSubmitElement.removeEventListener('click', onSetupSubmitClick);
-  setupPlayer.removeEventListener('click', onSetupWizardColorClick);
+  setupPlayerElement.removeEventListener('click', onSetupWizardColorClick);
 };
 
 setupFormOpenElement.addEventListener('click', function () {
