@@ -10,11 +10,21 @@ var WIZARD_QUANTITY = 4;
 var KEYCODE_ENTER = 13;
 var KEYCODE_ESC = 27;
 
-var CUSTOM_WARNING_MESSAGE_MAP = {
-  tooShortField: 'Имя должно состоять минимум из 2-х символов',
-  emptyField: 'Обязательное поле',
-  clearCustomValidityText: ''
-};
+var setupFormOpenElement = document.querySelector('.setup-open');
+var setupFormCloseElement = document.querySelector('.setup-close');
+var setupFormIconElement = document.querySelector('.setup-open-icon');
+var setupFormElement = document.querySelector('.setup');
+var setupUserNameElement = document.querySelector('.setup-user-name');
+var setupSubmitElement = document.querySelector('.setup-submit');
+
+var setupPlayerElement = document.querySelector('.setup-player');
+var wizardCoatColorElement = document.querySelector('.wizard-coat');
+var wizardEyesColorElement = document.querySelector('.wizard-eyes');
+var wizardFireballColorElement = document.querySelector('.setup-fireball');
+
+setupFormIconElement.tabIndex = 0;
+setupFormCloseElement.tabIndex = 0;
+setupSubmitElement.tabIndex = 0;
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplateElement.cloneNode(true);
@@ -58,22 +68,18 @@ var getRandomElement = function (array) {
   return array[getRandomNumber(0, array.length - 1)];
 };
 
-var onSetupSubmitClick = function () {
+var handleFormSubmit = function () {
   if (setupUserNameElement.checkValidity()) {
     setupFormElement.submit();
-  } else {
-    localizeUserNameInValidity();
   }
 };
 
-var localizeUserNameInValidity = function () {
-  if (setupUserNameElement.validity.tooShort) {
-    setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.tooShortField);
-  } else if (setupUserNameElement.validity.valueMissing) {
-    setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.emptyField);
-  } else {
-    setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.clearCustomValidityText);
-  }
+var onSetupSubmitClick = function () {
+  handleFormSubmit();
+};
+
+var onSetupFormSubmit = function () {
+  handleFormSubmit();
 };
 
 var onPopupEscClose = function (evt) {
@@ -98,10 +104,8 @@ var onSetupWizardColorClick = function (evt) {
 
 var popupOpen = function () {
   setupFormElement.classList.remove('hidden');
-  setupFormElement.addEventListener('submit', onSetupSubmitClick);
+  setupFormElement.addEventListener('submit', onSetupFormSubmit);
   document.addEventListener('keydown', onPopupEscClose);
-  setupUserNameElement.addEventListener('invalid', localizeUserNameInValidity);
-  setupUserNameElement.addEventListener('input', localizeUserNameInValidity);
   setupSubmitElement.addEventListener('click', onSetupSubmitClick);
   setupPlayerElement.addEventListener('click', onSetupWizardColorClick);
 };
@@ -110,27 +114,9 @@ var popupClose = function () {
   setupFormElement.classList.add('hidden');
   setupFormElement.removeEventListener('submit', onSetupSubmitClick);
   document.removeEventListener('keydown', onPopupEscClose);
-  setupUserNameElement.removeEventListener('invalid', localizeUserNameInValidity);
-  setupUserNameElement.removeEventListener('input', localizeUserNameInValidity);
   setupSubmitElement.removeEventListener('click', onSetupSubmitClick);
   setupPlayerElement.removeEventListener('click', onSetupWizardColorClick);
 };
-
-var setupFormOpenElement = document.querySelector('.setup-open');
-var setupFormCloseElement = document.querySelector('.setup-close');
-var setupFormIconElement = document.querySelector('.setup-open-icon');
-var setupFormElement = document.querySelector('.setup');
-var setupUserNameElement = document.querySelector('.setup-user-name');
-var setupSubmitElement = document.querySelector('.setup-submit');
-
-var setupPlayerElement = document.querySelector('.setup-player');
-var wizardCoatColorElement = document.querySelector('.wizard-coat');
-var wizardEyesColorElement = document.querySelector('.wizard-eyes');
-var wizardFireballColorElement = document.querySelector('.setup-fireball');
-
-setupFormIconElement.tabIndex = 0;
-setupFormCloseElement.tabIndex = 0;
-setupSubmitElement.tabIndex = 0;
 
 var userDialogElement = document.querySelector('.setup');
 var similarListElement = userDialogElement.querySelector('.setup-similar-list');
