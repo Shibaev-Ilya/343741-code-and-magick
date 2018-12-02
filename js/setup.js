@@ -76,12 +76,14 @@ var getRandomElement = function (array) {
 };
 
 var onSetupSubmitClick = function () {
-  if (setupUserNameElement.checkValidity() && onUserNameInValidity()) {
+  if (setupUserNameElement.checkValidity()) {
     setupFormElement.submit();
+  } else {
+    localizeUserNameInValidity();
   }
 };
 
-var onUserNameInValidity = function () {
+var localizeUserNameInValidity = function () {
   if (setupUserNameElement.validity.tooShort) {
     setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.tooShort);
   } else if (setupUserNameElement.validity.valueMissing) {
@@ -100,8 +102,8 @@ var popupOpen = function () {
   setupFormElement.classList.remove('hidden');
   setupFormElement.addEventListener('submit', onSetupSubmitClick);
   document.addEventListener('keydown', onPopupEscClose);
-  setupUserNameElement.addEventListener('invalid', onUserNameInValidity);
-  setupUserNameElement.addEventListener('input', onUserNameInValidity);
+  setupUserNameElement.addEventListener('invalid', localizeUserNameInValidity);
+  setupUserNameElement.addEventListener('input', localizeUserNameInValidity);
   setupSubmitElement.addEventListener('click', onSetupSubmitClick);
   setupPlayerElement.addEventListener('click', onSetupWizardColorClick);
 };
@@ -110,8 +112,8 @@ var popupClose = function () {
   setupFormElement.classList.add('hidden');
   setupFormElement.removeEventListener('submit', onSetupSubmitClick);
   document.removeEventListener('keydown', onPopupEscClose);
-  setupUserNameElement.removeEventListener('invalid', onUserNameInValidity);
-  setupUserNameElement.removeEventListener('input', onUserNameInValidity);
+  setupUserNameElement.removeEventListener('invalid', localizeUserNameInValidity);
+  setupUserNameElement.removeEventListener('input', localizeUserNameInValidity);
   setupSubmitElement.removeEventListener('click', onSetupSubmitClick);
   setupPlayerElement.removeEventListener('click', onSetupWizardColorClick);
 };
