@@ -16,24 +16,6 @@ var CUSTOM_WARNING_MESSAGE_MAP = {
   clearCustomValidityText: ''
 };
 
-// variables
-var setupFormOpenElement = document.querySelector('.setup-open');
-var setupFormCloseElement = document.querySelector('.setup-close');
-var setupFormIconElement = document.querySelector('.setup-open-icon');
-var setupFormElement = document.querySelector('.setup');
-var setupUserNameElement = document.querySelector('.setup-user-name');
-var setupSubmitElement = document.querySelector('.setup-submit');
-
-var setupPlayerElement = document.querySelector('.setup-player');
-var wizardCoatColorElement = document.querySelector('.wizard-coat');
-var wizardEyesColorElement = document.querySelector('.wizard-eyes');
-var wizardFireballColorElement = document.querySelector('.setup-fireball');
-
-setupFormIconElement.tabIndex = 0;
-setupFormCloseElement.tabIndex = 0;
-setupSubmitElement.tabIndex = 0;
-
-// function
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplateElement.cloneNode(true);
 
@@ -99,6 +81,21 @@ var onPopupEscClose = function (evt) {
     setupFormElement.classList.add('hidden');
   }
 };
+
+var onSetupWizardColorClick = function (evt) {
+  switch (evt.target) {
+    case wizardCoatColorElement:
+      wizardCoatColorElement.style.fill = getRandomElement(WIZARD_COATS_COLORS);
+      break;
+    case wizardEyesColorElement:
+      wizardEyesColorElement.style.fill = getRandomElement(WIZARD_EYES_COLORS);
+      break;
+    case wizardFireballColorElement:
+      wizardFireballColorElement.parentNode.style.background = getRandomElement(WIZARD_FIREBALL_COLOR);
+      break;
+  }
+};
+
 var popupOpen = function () {
   setupFormElement.classList.remove('hidden');
   setupFormElement.addEventListener('submit', onSetupSubmitClick);
@@ -119,6 +116,32 @@ var popupClose = function () {
   setupPlayerElement.removeEventListener('click', onSetupWizardColorClick);
 };
 
+var setupFormOpenElement = document.querySelector('.setup-open');
+var setupFormCloseElement = document.querySelector('.setup-close');
+var setupFormIconElement = document.querySelector('.setup-open-icon');
+var setupFormElement = document.querySelector('.setup');
+var setupUserNameElement = document.querySelector('.setup-user-name');
+var setupSubmitElement = document.querySelector('.setup-submit');
+
+var setupPlayerElement = document.querySelector('.setup-player');
+var wizardCoatColorElement = document.querySelector('.wizard-coat');
+var wizardEyesColorElement = document.querySelector('.wizard-eyes');
+var wizardFireballColorElement = document.querySelector('.setup-fireball');
+
+setupFormIconElement.tabIndex = 0;
+setupFormCloseElement.tabIndex = 0;
+setupSubmitElement.tabIndex = 0;
+
+var userDialogElement = document.querySelector('.setup');
+var similarListElement = userDialogElement.querySelector('.setup-similar-list');
+var similarWizardTemplateElement = document.querySelector('#similar-wizard-template')
+    .content
+    .querySelector('.setup-similar-item');
+
+userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
+
+renderWizards(generateWizards());
+
 setupFormOpenElement.addEventListener('click', function () {
   popupOpen();
 });
@@ -136,24 +159,3 @@ setupFormCloseElement.addEventListener('click', function () {
 setupFormCloseElement.addEventListener('keydown', function () {
   popupClose();
 });
-
-var onSetupWizardColorClick = function (evt) {
-  var target = evt.target;
-  if (target === wizardCoatColorElement) {
-    wizardCoatColorElement.style.fill = getRandomElement(WIZARD_COATS_COLORS);
-  } else if (target === wizardEyesColorElement) {
-    wizardEyesColorElement.style.fill = getRandomElement(WIZARD_EYES_COLORS);
-  } else if (target === wizardFireballColorElement) {
-    wizardFireballColorElement.parentNode.style.background = getRandomElement(WIZARD_FIREBALL_COLOR);
-  }
-};
-
-// logic
-var userDialogElement = document.querySelector('.setup');
-var similarListElement = userDialogElement.querySelector('.setup-similar-list');
-var similarWizardTemplateElement = document.querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
-userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
-
-renderWizards(generateWizards());
