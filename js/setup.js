@@ -11,8 +11,9 @@ var KEYCODE_ENTER = 13;
 var KEYCODE_ESC = 27;
 
 var CUSTOM_WARNING_MESSAGE_MAP = {
-  tooShort: 'Имя должно состоять минимум из 2-х символов',
-  emptyField: 'Обязательное поле'
+  tooShortField: 'Имя должно состоять минимум из 2-х символов',
+  emptyField: 'Обязательное поле',
+  clearCustomValidityText: ''
 };
 
 // variables
@@ -85,11 +86,11 @@ var onSetupSubmitClick = function () {
 
 var localizeUserNameInValidity = function () {
   if (setupUserNameElement.validity.tooShort) {
-    setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.tooShort);
+    setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.tooShortField);
   } else if (setupUserNameElement.validity.valueMissing) {
     setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.emptyField);
   } else {
-    setupUserNameElement.setCustomValidity('');
+    setupUserNameElement.setCustomValidity(CUSTOM_WARNING_MESSAGE_MAP.clearCustomValidityText);
   }
 };
 
