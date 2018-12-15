@@ -16,8 +16,8 @@ var setupFormIconElement = document.querySelector('.setup-open-icon');
 var setupFormElement = document.querySelector('.setup');
 var setupUserNameElement = document.querySelector('.setup-user-name');
 var setupSubmitElement = document.querySelector('.setup-submit');
-
 var setupPlayerElement = document.querySelector('.setup-player');
+
 var wizardCoatColorElement = document.querySelector('.wizard-coat');
 var wizardEyesColorElement = document.querySelector('.wizard-eyes');
 var wizardFireballColorElement = document.querySelector('.setup-fireball');
@@ -145,3 +145,4 @@ setupFormCloseElement.addEventListener('click', function () {
 setupFormCloseElement.addEventListener('keydown', function () {
   popupClose();
 });
+
