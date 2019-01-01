@@ -8,10 +8,6 @@
 
   var KEYCODE_ESC = 27;
 
-  var onSetupSubmitClick = function () {
-    handleFormSubmit();
-  };
-
   var onSetupFormSubmit = function () {
     handleFormSubmit();
   };
@@ -51,7 +47,7 @@
 
   var popupClose = function () {
     setupFormElement.classList.add('hidden');
-    setupFormElement.removeEventListener('submit', onSetupSubmitClick);
+    setupFormElement.removeEventListener('submit', onSetupFormSubmit);
     document.removeEventListener('keydown', onPopupEscClose);
     setupPlayerElement.removeEventListener('click', onSetupWizardColorClick);
   };
