@@ -46,7 +46,6 @@
     setupFormElement.classList.remove('hidden');
     setupFormElement.addEventListener('submit', onSetupFormSubmit);
     document.addEventListener('keydown', onPopupEscClose);
-    setupSubmitElement.addEventListener('click', onSetupSubmitClick);
     setupPlayerElement.addEventListener('click', onSetupWizardColorClick);
   };
 
@@ -54,7 +53,6 @@
     setupFormElement.classList.add('hidden');
     setupFormElement.removeEventListener('submit', onSetupSubmitClick);
     document.removeEventListener('keydown', onPopupEscClose);
-    setupSubmitElement.removeEventListener('click', onSetupSubmitClick);
     setupPlayerElement.removeEventListener('click', onSetupWizardColorClick);
   };
 
