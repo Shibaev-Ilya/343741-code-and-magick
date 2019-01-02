@@ -8,9 +8,10 @@
 
   var KEYCODE_ESC = 27;
 
-  var onSetupFormSubmit = function () {
-    handleFormSubmit();
-  };
+  // var onSetupFormSubmit = function () {
+  //   Возможно будет закрытие попапа
+  //   }
+  // };
 
   var onPopupEscClose = function (evt) {
     if (evt.keyCode === KEYCODE_ESC && evt.target !== setupUserNameElement) {
@@ -32,22 +33,16 @@
     }
   };
 
-  var handleFormSubmit = function () {
-    if (setupUserNameElement.checkValidity()) {
-      setupFormElement.submit();
-    }
-  };
-
   var popupOpen = function () {
     setupFormElement.classList.remove('hidden');
-    setupFormElement.addEventListener('submit', onSetupFormSubmit);
+    // setupFormElement.addEventListener('submit', onSetupFormSubmit);
     document.addEventListener('keydown', onPopupEscClose);
     setupPlayerElement.addEventListener('click', onSetupWizardColorClick);
   };
 
   var popupClose = function () {
     setupFormElement.classList.add('hidden');
-    setupFormElement.removeEventListener('submit', onSetupFormSubmit);
+    // setupFormElement.removeEventListener('submit', onSetupFormSubmit);
     document.removeEventListener('keydown', onPopupEscClose);
     setupPlayerElement.removeEventListener('click', onSetupWizardColorClick);
   };
