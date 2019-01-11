@@ -76,11 +76,9 @@
   var generateRandomColor = function (color) {
     switch (color) {
       case 'red':
-        return 'rgba(' + Math.round(Math.random() * 255) + ', 0, 0, ,1)';
+        return 'rgba(' + Math.round(Math.random() * 255) + ', 0, 0, 1)';
       case 'green':
         return 'rgba(0, ' + Math.round(Math.random() * 255) + ', 0, 1)';
-      case 'blue':
-        return 'rgba(0, 0,' + Math.round(Math.random() * 255) + ', 1)';
       default:
         return 'rgba(0, 0,' + Math.round(Math.random() * 255) + ', 1)';
     }
