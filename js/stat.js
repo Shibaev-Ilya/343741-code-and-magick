@@ -54,17 +54,6 @@
     ctx.fill();
   };
 
-  var getMaxElement = function (arr) {
-    var maxElement = arr[0];
-
-    for (var i = 1; i < arr.length; i++) {
-      if (typeof arr[i] !== 'undefined' && arr[i] > maxElement) {
-        maxElement = arr[i];
-      }
-    }
-    return maxElement;
-  };
-
   var renderMessages = function (ctx) {
     ctx.fillStyle = MESSAGE_FONT_COLOR;
     ctx.font = MESSAGE_FONT;
@@ -73,36 +62,28 @@
     ctx.fillText(MESSAGE_TEXT_RESULT, MESSAGE_START_POSITION, MESSAGE_TEXT_INDENT + MESSAGE_LINEHEIGHT);
   };
 
-  var generateRandomColor = function (color) {
-    switch (color) {
-      case 'red':
-        return 'rgba(' + Math.round(Math.random() * 255) + ', 0, 0, 1)';
-      case 'green':
-        return 'rgba(0, ' + Math.round(Math.random() * 255) + ', 0, 1)';
-      default:
-        return 'rgba(0, 0,' + Math.round(Math.random() * 255) + ', 1)';
-    }
-  };
-
   var renderBars = function (ctx, times, names) {
-    var maxTime = getMaxElement(times);
+    var maxTime = window.utils.getMaxElement(times);
     var barPositionX;
     var barPositionY;
-    for (var i = 0; i < names.length; i++) {
+    var counter = 0;
 
+    names.forEach(function (name) {
       ctx.fillStyle = TEXT_COLOR;
       ctx.textBaseline = TEXT_BASELINE;
 
-      barPositionX = CLOUD_X + BAR_WIDTH_INDENT + (BAR_WIDTH + BAR_WIDTH_INDENT) * i;
-      barPositionY = (BAR_HEIGHT * times[i]) / maxTime * (-1);
+      barPositionX = CLOUD_X + BAR_WIDTH_INDENT + (BAR_WIDTH + BAR_WIDTH_INDENT) * counter;
+      barPositionY = (BAR_HEIGHT * times[counter]) / maxTime * (-1);
 
-      ctx.fillText(Math.floor(times[i]), barPositionX, barPositionY + MESSAGE_TIME_INDENT);
-      ctx.fillText(names[i], barPositionX, CLOUD_HEIGHT - TEXT_INDENT);
+      ctx.fillText(Math.floor(times[counter]), barPositionX, barPositionY + MESSAGE_TIME_INDENT);
+      ctx.fillText(names[counter], barPositionX, CLOUD_HEIGHT - TEXT_INDENT);
 
-      ctx.fillStyle = names[i] === TEXT_USER_NAME ? BAR_PLAYER_COLOR : generateRandomColor('blue');
+      ctx.fillStyle = names[name] === TEXT_USER_NAME ? BAR_PLAYER_COLOR : window.utils.generateRandomColor('blue');
 
       ctx.fillRect(barPositionX, CLOUD_HEIGHT - BAR_BOTTOM_INDENT, BAR_WIDTH, barPositionY);
-    }
+
+      counter++;
+    });
   };
 
   window.renderStatistics = function (ctx, names, times) {

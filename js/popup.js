@@ -1,10 +1,30 @@
 'use strict';
 
 (function () {
-  var WIZARD_FIREBALL_COLOR = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-  var WIZARD_EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
-  var WIZARD_COATS_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+  var WIZARD_FIREBALL_COLOR = [
+    '#ee4830',
+    '#30a8ee',
+    '#5ce6c0',
+    '#e848d5',
+    '#e6e848'
+  ];
 
+  var WIZARD_EYES_COLORS = [
+    'black',
+    'red',
+    'blue',
+    'yellow',
+    'green'
+  ];
+
+  var WIZARD_COATS_COLORS = [
+    'rgb(101, 137, 164)',
+    'rgb(241, 43, 107)',
+    'rgb(146, 100, 161)',
+    'rgb(56, 159, 117)',
+    'rgb(215, 210, 55)',
+    'rgb(0, 0, 0)'
+  ];
 
   var KEYCODE_ESC = 27;
 
@@ -17,13 +37,13 @@
   var onSetupWizardColorClick = function (evt) {
     switch (evt.target) {
       case wizardCoatColorElement:
-        wizardCoatColorElement.style.fill = window.setup.getRandomElement(WIZARD_COATS_COLORS);
+        wizardCoatColorElement.style.fill = window.utils.getRandomElement(WIZARD_COATS_COLORS);
         break;
       case wizardEyesColorElement:
-        wizardEyesColorElement.style.fill = window.setup.getRandomElement(WIZARD_EYES_COLORS);
+        wizardEyesColorElement.style.fill = window.utils.getRandomElement(WIZARD_EYES_COLORS);
         break;
       case wizardFireballColorElement:
-        wizardFireballColorElement.parentNode.style.background = window.setup.getRandomElement(WIZARD_FIREBALL_COLOR);
+        wizardFireballColorElement.parentNode.style.background = window.utils.getRandomElement(WIZARD_FIREBALL_COLOR);
         break;
     }
   };
