@@ -31,7 +31,7 @@
   };
 
   var onLoadWizardsError = function (error) {
-    window.errorMessage.createErrorMessage(error);
+    window.errorMessage.create(error);
   };
 
   window.backend.load(onLoadWizardsSuccess, onLoadWizardsError);

@@ -18,14 +18,18 @@
   };
 
   var ERROR_CONNECTION = 'Произошла ошибка соединения';
-  var ERROR_TIMEOUT = 'Запрос не успел выполниться за ';
-  var TIME_TEXT = 'мс';
   var TEMPLATE_ERROR_MESSAGE = 'Статус ответа: {statusCode} {statusText}';
+  var TEMPLATE_ERROR_TIMEOUT = 'Запрос не успел выполниться за: {timeout} мс';
 
   var createErrorMessage = function (statusCode, statusText) {
     return TEMPLATE_ERROR_MESSAGE
     .replace('{statusCode}', statusCode)
     .replace('{statusText}', statusText);
+  };
+
+  var createTimeoutMessage = function (timeout) {
+    return TEMPLATE_ERROR_TIMEOUT
+    .replace('{timeout}', timeout);
   };
 
   var createRequest = function (url, method, onLoad, onError, data) {
@@ -39,7 +43,7 @@
       onError(ERROR_CONNECTION);
     });
     xhr.addEventListener(LoadEventHandlers.TIMEOUT, function () {
-      onError(ERROR_TIMEOUT + xhr.timeout + TIME_TEXT);
+      onError(createTimeoutMessage(xhr.timeout));
     });
     xhr.timeout = RESPONSE_TIMEOUT;
 

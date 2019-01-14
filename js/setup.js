@@ -30,10 +30,17 @@
     window.popup.close();
   });
 
+  var onSaveError = function (error) {
+    window.errorMessage.create(error);
+  };
+
   setupFormElement.addEventListener('submit', function (evt) {
-    window.backend.save(new FormData(setupFormElement), function () {
-      window.popup.close();
-    });
+    window.backend.save(
+        new FormData(setupFormElement),
+        function () {
+          window.popup.close();
+        },
+        onSaveError);
     evt.preventDefault();
   });
 

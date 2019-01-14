@@ -6,14 +6,15 @@
   var ERROR_MESSAGE_POSITION_LEFT = 0;
   var ERROR_MESSAGE_POSITION_RIGHT = 0;
   var ERROR_MESSAGE_FONTSIZE = '30px';
+  var PAGE_RELOAD_TIME = 1000;
 
   var KEY_CODE_ESC = 27;
 
-  var errorElement = document.querySelector('.erro-message');
+  var element = document.querySelector('.erro-message');
 
   var removeListener = function () {
-    if (errorElement) {
-      errorElement.removeEventListener('keydown', onDocumentKeydownEsc);
+    if (element) {
+      element.removeEventListener('keydown', onDocumentKeydownEsc);
     }
   };
 
@@ -21,25 +22,25 @@
     evt.preventDefault();
 
     if (evt.keyCode === KEY_CODE_ESC) {
-      errorElement.remove();
+      element.remove();
 
       setTimeout(function () {
         location.reload();
-      }, 1000);
+      }, PAGE_RELOAD_TIME);
     }
   };
 
   var createErrorMessage = function (errorMessage) {
-    errorElement = document.createElement('div');
-    errorElement.classList.add('error-message');
-    errorElement.style = ERROR_MESSAGE_STYLE;
-    errorElement.style.position = ERROR_MESSAGE_POSITION;
-    errorElement.style.left = ERROR_MESSAGE_POSITION_LEFT;
-    errorElement.style.right = ERROR_MESSAGE_POSITION_RIGHT;
-    errorElement.style.fontSize = ERROR_MESSAGE_FONTSIZE;
+    element = document.createElement('div');
+    element.classList.add('error-message');
+    element.style = ERROR_MESSAGE_STYLE;
+    element.style.position = ERROR_MESSAGE_POSITION;
+    element.style.left = ERROR_MESSAGE_POSITION_LEFT;
+    element.style.right = ERROR_MESSAGE_POSITION_RIGHT;
+    element.style.fontSize = ERROR_MESSAGE_FONTSIZE;
 
-    errorElement.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', errorElement);
+    element.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', element);
 
     document.addEventListener('keydown', onDocumentKeydownEsc);
   };
@@ -47,6 +48,6 @@
   removeListener();
 
   window.errorMessage = {
-    createErrorMessage: createErrorMessage
+    create: createErrorMessage
   };
 })();
