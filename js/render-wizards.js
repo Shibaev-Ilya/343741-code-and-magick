@@ -30,8 +30,8 @@
     userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  var onLoadWizardsError = function () {
-    window.errorMessage.createErrorMessage();
+  var onLoadWizardsError = function (error) {
+    window.errorMessage.createErrorMessage(error);
   };
 
   window.backend.load(onLoadWizardsSuccess, onLoadWizardsError);
