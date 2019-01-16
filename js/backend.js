@@ -23,13 +23,13 @@
 
   var createErrorMessage = function (statusCode, statusText) {
     return TEMPLATE_ERROR_MESSAGE
-    .replace('{statusCode}', statusCode)
-    .replace('{statusText}', statusText);
+      .replace('{statusCode}', statusCode)
+      .replace('{statusText}', statusText);
   };
 
   var createTimeoutMessage = function (timeout) {
     return TEMPLATE_ERROR_TIMEOUT
-    .replace('{timeout}', timeout);
+      .replace('{timeout}', timeout);
   };
 
   var createRequest = function (url, method, onLoad, onError, data) {

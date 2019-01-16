@@ -22,7 +22,7 @@
   var onLoadWizardsSuccess = function (wizards) {
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < WIZARD_QUANTITY; i++) {
+    for (var i = 0; (i < WIZARD_QUANTITY || i === wizards.length); i++) {
       fragment.appendChild(renderWizard(wizards[i]));
     }
     similarListElement.appendChild(fragment);

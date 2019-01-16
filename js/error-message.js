@@ -10,11 +10,26 @@
 
   var KEY_CODE_ESC = 27;
 
-  var element = document.querySelector('.erro-message');
+  var createErrorMessage = function (errorMessage) {
+    errortElement = document.createElement('div');
+    errortElement.classList.add('error-message');
+    errortElement.style = ERROR_MESSAGE_STYLE;
+    errortElement.style.position = ERROR_MESSAGE_POSITION;
+    errortElement.style.left = ERROR_MESSAGE_POSITION_LEFT;
+    errortElement.style.right = ERROR_MESSAGE_POSITION_RIGHT;
+    errortElement.style.fontSize = ERROR_MESSAGE_FONTSIZE;
+
+    errortElement.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', errortElement);
+
+    document.addEventListener('keydown', onDocumentKeydownEsc);
+  };
+
+  var errortElement = document.querySelector('.error-message');
 
   var removeListener = function () {
-    if (element) {
-      element.removeEventListener('keydown', onDocumentKeydownEsc);
+    if (errortElement) {
+      errortElement.removeEventListener('keydown', onDocumentKeydownEsc);
     }
   };
 
@@ -22,27 +37,12 @@
     evt.preventDefault();
 
     if (evt.keyCode === KEY_CODE_ESC) {
-      element.remove();
+      errortElement.remove();
 
       setTimeout(function () {
         location.reload();
       }, PAGE_RELOAD_TIME);
     }
-  };
-
-  var createErrorMessage = function (errorMessage) {
-    element = document.createElement('div');
-    element.classList.add('error-message');
-    element.style = ERROR_MESSAGE_STYLE;
-    element.style.position = ERROR_MESSAGE_POSITION;
-    element.style.left = ERROR_MESSAGE_POSITION_LEFT;
-    element.style.right = ERROR_MESSAGE_POSITION_RIGHT;
-    element.style.fontSize = ERROR_MESSAGE_FONTSIZE;
-
-    element.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', element);
-
-    document.addEventListener('keydown', onDocumentKeydownEsc);
   };
 
   removeListener();
