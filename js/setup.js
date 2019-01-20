@@ -4,6 +4,7 @@
 
   var KEYCODE_ENTER = 13;
 
+  var setupFormElement = document.querySelector('.setup-wizard-form');
   var setupFormOpenElement = document.querySelector('.setup-open');
   var setupFormCloseElement = document.querySelector('.setup-close');
   var setupFormIconElement = document.querySelector('.setup-open-icon');
@@ -28,5 +29,18 @@
   setupFormCloseElement.addEventListener('keydown', function () {
     window.popup.close();
   });
+
+  setupFormElement.addEventListener('submit', function (evt) {
+    window.backend.save(
+        new FormData(setupFormElement),
+        function () {
+          window.popup.close();
+        },
+        function (error) {
+          window.errorMessage.create(error);
+        });
+    evt.preventDefault();
+  });
+
 })();
 
